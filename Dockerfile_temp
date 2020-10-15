@@ -1,0 +1,12 @@
+FROM debian:buster-slim
+
+RUN apt-get update && apt-get -y install apache2 && apt-get clean
+RUN a2enmod ssl
+
+EXPOSE 80
+EXPOSE 443
+
+COPY html /var/www/html
+COPY apache2 /etc/apache2
+
+CMD apachectl -D FOREGROUND
